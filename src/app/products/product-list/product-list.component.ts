@@ -44,12 +44,17 @@ export class ProductListComponent implements OnInit, OnDestroy {
     //       this.displayCode = products.showProductCode;
     //     }
     //   });
-
-    // TODO: Unsubscribe
+/*
     // Don't need to check the if condition (see above) because initialize state was set.
     this.store.pipe(select('products')).subscribe(
       products => this.displayCode = products.showProductCode
       );
+*/
+    // TODO: Unsubscribe
+    this.store.pipe(select(fromProduct.getShowProductCode)).subscribe(
+      showProductCode => this.displayCode = showProductCode
+    );
+
   }
 
   ngOnDestroy(): void {
