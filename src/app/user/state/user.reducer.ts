@@ -1,7 +1,7 @@
 export function reducer(state, action) {
   switch (action.type) {
 
-    case 'TOGGLE_MASK_USERNAME':
+    case 'MASK_USER_NAME':
       // // it will show as:
       // // existing state: undefined
       // // product.reducer.ts:6 payload: true
@@ -11,7 +11,7 @@ export function reducer(state, action) {
       console.log('payload: ' + action.payload);
       return {
         ...state,
-        showUserName: action.payload
+        maskUserName: action.payload
       };
 
     default:

@@ -22,11 +22,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     // TODO: Unsubscribe
-    this.store.pipe(select('user')).subscribe(
-      user => {
+    this.store.pipe(select('users')).subscribe(
+      users => {
         // Need to make sure products slice from state exists first.
-        if (user) {
-          this.maskUserName = user.showUserName;
+        if (users) {
+          this.maskUserName = users.maskUserName;
         }
       });
   }
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   checkChanged(value: boolean): void {
     // this.maskUserName = value;
     this.store.dispatch({
-      type: 'TOGGLE_MASK_USERNAME',
+      type: 'MASK_USER_NAME',
       payload: value
     });
   }
