@@ -150,7 +150,19 @@ Encapsulate complex data transformations
 Reusable
 Memoized (cached)
 
-
-
-
+Composing Selectors:
+------------------------
+products: {
+  showProductCode: true,
+  currentProduct: {...},
+  products: [...]
+},
+exportconstgetCurrentProduct= createSelector(
+  getProductFeatureState,
+  getCurrentProductId,
+  (state, currentProductId) =>
+    state.products.find(p =>p.id === currentProductId)
+);
+Bottom line, when building selectors, define one for each bit of state that is accessed from the store 
+and compose them as needed by your components and services.
 
