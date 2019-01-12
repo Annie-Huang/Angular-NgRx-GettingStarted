@@ -111,8 +111,28 @@ Product Module --
 })
 
 
+Checklist: Dispatching an Action
+-----------------------------------------
+Often done in response to a user action or an operation
+Inject the store in the constructor
+Call the dispatch method of the store
+Pass in the action to dispatch:
+this.store.dispatch({
+  type: 'TOGGLE_PRODUCT_CODE',
+  payload: value
+});
+Passed to all reducers
 
 
-
+Checklist: Subscribing to the Store
+--------------------------------------------
+Often done in the ngOnInitlifecycle hook
+Inject the store in the constructor
+Use the store's select operator, passing in the desired slice of state
+Subscribe:
+  this.store.pipe(select('products')).subscribe(
+  products =>this.displayCode= products.showProductCode
+);
+Receives notifications when the state changes
 
 
