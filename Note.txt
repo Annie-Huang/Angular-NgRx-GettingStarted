@@ -57,7 +57,16 @@ Use Reducers to Change State
 - Set successfully retrieved data on component initialization
 - Set a globalSpinnerVisible property to true while saving data
 
+Advantages of the Redux Pattern
+Centralized immutable state
+Performance
+Testability
+Tooling
+Component communication
 
+
+First Look at NgRx
+############################
 
 
 
