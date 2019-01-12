@@ -143,7 +143,12 @@ D:\react\Angular-NgRx-GettingStarted>npm install @ngrx/store-devtools@6.0.1
 
 Strongly Typing the State
 ####################################
-
+Benefits of Selectors
+Provide a strongly typed API
+Decouple the store from the components
+Encapsulate complex data transformations
+Reusable
+Memoized (cached)
 
 
 

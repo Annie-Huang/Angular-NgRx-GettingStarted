@@ -1,6 +1,8 @@
 import {Product} from "../product";
 import * as fromRoot from '../../state/app.state';
+import {createFeatureSelector, createSelector} from "@ngrx/store";
 
+// app.state + ProductState as the State. Will be use in product-list.component.ts's constructor
 export interface State extends fromRoot.State {
   products: ProductState
 }
@@ -17,6 +19,27 @@ const initialState: ProductState = {
   currentProduct: null,
   products: []
 };
+
+
+
+// Notice this is not export for outside access.
+const getProductFeatureState = createFeatureSelector<ProductState>('products');
+
+// Just get the showProductCode value from the getProductFeatureState.
+export const getShowProductCode = createSelector(
+  getProductFeatureState,
+  state => state.showProductCode
+);
+export const getCurrentProduct = createSelector(
+  getProductFeatureState,
+  state => state.currentProduct
+);
+export const getProducts = createSelector(
+  getProductFeatureState,
+  state => state.products
+);
+
+
 
 // By typing the initial value, the type is implicitly refer so don't need to put the type
 // state: ProductState => state = initialState
