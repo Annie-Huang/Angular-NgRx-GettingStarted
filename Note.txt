@@ -79,12 +79,29 @@ https://github.com/angular/in-memory-web-api
 D:\react\Angular-NgRx-GettingStarted>npm install
 D:\react\Angular-NgRx-GettingStarted>npm run start
 
+D:\react\Angular-NgRx-GettingStarted>npm install @ngrx/store
 
 
-
-
-
-
+Feature Module State Composition
+------------------------------------
+App Module --
+@NgModule({
+  imports: [
+    ...
+    RouterModule.forRoot(appRoutes),
+    StoreModule.forRoot(reducer)
+  ],
+  ...
+})
+Product Module --
+@NgModule({
+  imports: [
+    ...
+    RouterModule.forChild(productRoutes),
+    StoreModule.forFeature('products', reducer)
+  ],
+  ...
+})
 
 
 
