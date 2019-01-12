@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from './auth.service';
+import {select, Store} from "@ngrx/store";
 
 @Component({
   templateUrl: './login.component.html',
@@ -14,12 +15,20 @@ export class LoginComponent implements OnInit {
 
   maskUserName: boolean;
 
-  constructor(private authService: AuthService,
+  constructor(private store: Store<any>,
+              private authService: AuthService,
               private router: Router) {
   }
 
   ngOnInit(): void {
-
+    // TODO: Unsubscribe
+    this.store.pipe(select('user')).subscribe(
+      user => {
+        // Need to make sure products slice from state exists first.
+        if (user) {
+          this.maskUserName = user.showUserName;
+        }
+      });
   }
 
   cancel(): void {
@@ -27,7 +36,11 @@ export class LoginComponent implements OnInit {
   }
 
   checkChanged(value: boolean): void {
-    this.maskUserName = value;
+    // this.maskUserName = value;
+    this.store.dispatch({
+      type: 'TOGGLE_MASK_USERNAME',
+      payload: value
+    });
   }
 
   login(loginForm: NgForm): void {
