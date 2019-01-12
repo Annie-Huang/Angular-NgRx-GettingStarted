@@ -1,11 +1,17 @@
+Notes: D:\react\angular-ngrx-getting-started
 
 https://github.com/DeborahK/Angular-NgRx-GettingStarted
 https://github.com/Annie-Huang/Angular-NgRx-GettingStarted
 
-Notes: D:\react\angular-ngrx-getting-started
-
 https://github.com/ngrx/platform
 https://blogs.msmvps.com/deborahk/angular-ngrx-getting-started-problem-solver/
+https://github.com/angular/in-memory-web-api
+
+
+D:\react\Angular-NgRx-GettingStarted>npm run start
+
+
+
 
 Introduction
 ############################
@@ -68,10 +74,10 @@ Component communication
 First Look at NgRx
 ############################
 
+https://github.com/angular/in-memory-web-api
 
-
-
-
+D:\react\Angular-NgRx-GettingStarted>npm install
+D:\react\Angular-NgRx-GettingStarted>npm run start
 
 
 
