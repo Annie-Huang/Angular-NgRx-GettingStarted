@@ -140,3 +140,12 @@ Developer Tools and Debugging
 ####################################
 
 D:\react\Angular-NgRx-GettingStarted>npm install @ngrx/store-devtools@6.0.1
+
+Strongly Typing the State
+####################################
+
+
+
+
+
+

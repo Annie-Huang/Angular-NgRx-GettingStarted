@@ -1,3 +1,13 @@
+import {Product} from "../product";
+
+// State for this feature (Product)
+export interface ProductState {
+  showProductCode: boolean;
+  currentProduct: Product;
+  products: Product[];
+}
+
+
 export function reducer(state, action) {
   switch (action.type) {
 
