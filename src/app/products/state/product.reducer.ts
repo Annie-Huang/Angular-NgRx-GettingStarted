@@ -12,8 +12,15 @@ export interface ProductState {
   products: Product[];
 }
 
+const initialState: ProductState = {
+  showProductCode: true,
+  currentProduct: null,
+  products: []
+};
 
-export function reducer(state: ProductState, action): ProductState {
+// By typing the initial value, the type is implicitly refer so don't need to put the type
+// state: ProductState => state = initialState
+export function reducer(state = initialState, action): ProductState {
   switch (action.type) {
 
     case 'TOGGLE_PRODUCT_CODE':
