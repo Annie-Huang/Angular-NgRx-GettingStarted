@@ -10,9 +10,14 @@ https://github.com/angular/in-memory-web-api
 
 D:\react\Angular-NgRx-GettingStarted>npm run start
 
+How to change branch name in github:
+Annie@Annie-PC MINGW32 /d/react/Angular-NgRx-GettingStarted (APM-Demo0-The-starter-files-for-this-course)
+$ git branch -m 1-first-look-at-ngrx
+Annie@Annie-PC MINGW32 /d/react/Angular-NgRx-GettingStarted (1-first-look-at-ngrx)
+$ git push origin :APM-Demo0-The-starter-files-for-this-course 1-first-look-at-ngrx
 
-
-
+Annie@Annie-PC MINGW32 /d/react/Angular-NgRx-GettingStarted (1-first-look-at-ngrx)
+$ git push --delete origin APM-Demo0-The-starter-files-for-this-course
 
 
 Introduction
