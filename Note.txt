@@ -5,7 +5,7 @@ https://github.com/Annie-Huang/Angular-NgRx-GettingStarted
 Notes: D:\react\angular-ngrx-getting-started
 
 https://github.com/ngrx/platform
-
+https://blogs.msmvps.com/deborahk/angular-ngrx-getting-started-problem-solver/
 
 Introduction
 ############################
@@ -33,15 +33,29 @@ The application is simple
 Your team has a good pattern
 - No need to change if you already have a good state management pattern in place
 
+The Redux Pattern
+############################
+Redux Principles
+1. Single source of truth called the store
+2. State is read only and only changed by dispatching actions
+3. Changes are made using pure functions called reducers
 
+What Should Not Go in the Store?
+Unshared state
+Angular form state
+Non serializable state
 
+Dispatch an Action to Change State
+- Login action after a login form submission
+- Toggle side menu action after a button click
+- Retrieve data action when initializing a component
+- Start global spinner action when saving data
 
-
-
-
-
-
-
+Use Reducers to Change State
+- Set a userDetails property on login
+- Toggle a sideMenuVisible property to true on button click
+- Set successfully retrieved data on component initialization
+- Set a globalSpinnerVisible property to true while saving data
 
 
 
