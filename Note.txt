@@ -166,3 +166,53 @@ exportconstgetCurrentProduct= createSelector(
 Bottom line, when building selectors, define one for each bit of state that is accessed from the store 
 and compose them as needed by your components and services.
 
+
+Checklist: Strongly Typing State
+-----------------------------------
+Define an interface for each slice of state:
+export interface ProductState {
+  showProductCode: boolean;
+  currentProduct: Product;
+  products: Product[];
+}
+Compose them for the global application state
+Use the interfaces to strongly type the state
+import * as fromProduct from'./state/product.reducer';
+...
+constructor(privatestore: Store<fromProduct.State>){}
+
+Checklist: Building Selectors
+------------------------------
+Build selectors to define reusable state queries
+Conceptually similar to stored procedures
+Feature selector:
+const getProductFeatureState = createFeatureSelector<ProductState>('products');
+State selector:
+export const getShowProductCode = 
+  createSelector(
+    getProductFeatureState,
+    state =>state.showProductCode
+  );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
