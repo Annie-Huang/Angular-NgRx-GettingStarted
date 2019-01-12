@@ -1,0 +1,65 @@
+
+https://github.com/DeborahK/Angular-NgRx-GettingStarted
+https://github.com/Annie-Huang/Angular-NgRx-GettingStarted
+
+Notes: D:\react\angular-ngrx-getting-started
+
+https://github.com/ngrx/platform
+
+
+Introduction
+############################
+What Is State?
+View State
+User Information
+Entity Data
+User Selection and Input
+
+Use NgRxWhen...
+There is state everywhere!
+- The store provides a place for UI state to retain it between router views
+Getting data again and again!
+- The store provides a client-side cache to use as needed
+Notify everyone!
+- The reducer updates the store and the store notifies all subscribers
+Something isn't working!
+- It has great tooling
+
+Don't Use NgRxWhen...
+Your team is new to Angular
+- Ramp up with Angular and RxJSObservables first
+The application is simple
+- The extra code required for NgRxmay not be worth the effort
+Your team has a good pattern
+- No need to change if you already have a good state management pattern in place
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
