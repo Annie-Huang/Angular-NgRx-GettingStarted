@@ -20,7 +20,7 @@ import { UserModule } from './user/user.module';
 /* NgRx */
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import {environment} from "../environments/environment";
+import { environment } from '../environments/environment';
 
 @NgModule({
   imports: [
@@ -31,10 +31,9 @@ import {environment} from "../environments/environment";
     AppRoutingModule,
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
-      name: 'AMP Demo App Devtools',
+      name: 'APM Demo App DevTools',
       maxAge: 25,
-      logOnly: environment.production
-
+      logOnly: environment.production,
     })
   ],
   declarations: [
