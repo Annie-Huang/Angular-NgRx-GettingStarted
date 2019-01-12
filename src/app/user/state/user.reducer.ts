@@ -1,4 +1,38 @@
-export function reducer(state, action) {
+import {User} from "../user";
+import * as fromRoot from "../../state/app.state";
+import {createFeatureSelector, createSelector} from "@ngrx/store";
+import {ProductState} from "../../../../APM-Demo2/src/app/products/state/product.reducer";
+
+export interface State extends fromRoot.State {
+  users: UserState;
+}
+// State for this feature (User)
+export interface UserState {
+  maskUserName: boolean;
+  currentUser: User;
+}
+
+const initialState: UserState = {
+  maskUserName: false,
+  currentUser: null,
+};
+
+
+// Selector functions
+const getUserFeatureState = createFeatureSelector<UserState>('users');
+
+export const getMaskUserName = createSelector(
+  getUserFeatureState,
+  state => state.maskUserName
+);
+export const getCurrentUser = createSelector(
+  getUserFeatureState,
+  state => state.currentUser
+);
+
+
+
+export function reducer(state = initialState, action) {
   switch (action.type) {
 
     case 'MASK_USER_NAME':
