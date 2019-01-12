@@ -86,7 +86,7 @@ https://github.com/angular/in-memory-web-api
 D:\react\Angular-NgRx-GettingStarted>npm install
 D:\react\Angular-NgRx-GettingStarted>npm run start
 
-D:\react\Angular-NgRx-GettingStarted>npm install @ngrx/store
+D:\react\Angular-NgRx-GettingStarted>npm install @ngrx/store@6.0.1
 
 
 Feature Module State Composition
@@ -136,3 +136,7 @@ Subscribe:
 Receives notifications when the state changes
 
 
+Developer Tools and Debugging
+####################################
+
+D:\react\Angular-NgRx-GettingStarted>npm install @ngrx/store-devtools@6.0.1
