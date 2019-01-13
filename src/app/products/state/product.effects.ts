@@ -38,4 +38,31 @@ export class ProductEffects {
       map((products: Product[]) => (new productActions.LoadSuccess(products))) // Action
     ))
   )
+
+  /*
+RxJS Operators
+switchMap:  << Least use one.
+  Cancels the current subscription/request and can cause race condition
+  Use for get requests or cancelable requests like searches
+  It cancels the current subscription if a new value is emitted. This means if someone dispatches, for example,
+    a second save product action before the first save product action's HTTP request returns to your effect,
+    the first in-flight HTTP request will be canceled and the product might not get saved, leading to potential race conditions.
+
+concatMap   << Least performance, but the safest.
+  Runs subscriptions/requests in order and is less performant
+  Use for get, post and put requests when order is important
+
+mergeMap  << Most cases
+  Runs subscriptions/requests in parallel
+  Use for put, post and delete methods when order is not important
+  We used an RxJS merge map operator in our effect to map over our current actions observable
+    and merge any inner observables returned from calling our Angular service into a single observable stream,
+    which most of the time will likely be the operator you want, but not always.
+
+exhaustMap  << Use for login
+  Ignores all subsequent subscriptions/requests until it completes
+  Use for login when you do not want more requests until the initial one is complete
+*/
+
+
 }
