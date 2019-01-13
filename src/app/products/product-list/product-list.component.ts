@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
+
+/* NgRx */
 import {select, Store} from "@ngrx/store";
 import * as fromProduct from '../state/product.reducer';
 import * as productActions from '../state/product.actions';
@@ -34,7 +36,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     // TODO: Unsubscribe
     this.store.pipe(select(fromProduct.getCurrentProduct)).subscribe(
       currentProduct => this.selectedProduct = currentProduct
-    )
+    );
 
     this.productService.getProducts().subscribe(
       (products: Product[]) => this.products = products,
