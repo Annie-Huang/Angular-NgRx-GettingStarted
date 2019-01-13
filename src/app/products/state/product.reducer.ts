@@ -62,6 +62,15 @@ export function reducer(state = initialState, action: ProductActions): ProductSt
         showProductCode: action.payload
       };
 
+    // One important thing to note here, we are passing a reference to our currentProduct into the store.
+    // That means if we update a property of the object in our component, we mutate the product in the store as well.
+    // To prevent this, we make a copy of the object here, using the spread operator.
+    case ProductActionTypes.SetCurrentProduct:
+      return {
+        ...state,
+        currentProduct: { ...action.payload }
+      };
+
     default:
       return state;
   }
