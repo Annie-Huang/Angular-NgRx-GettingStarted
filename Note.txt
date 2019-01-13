@@ -195,9 +195,12 @@ export const getShowProductCode =
   );
 
 
-
-
-
+Strongly Typing Actions with Action Creators
+#################################################
+Benefits of Strongly Typed Actions
+Prevents hard to find errors
+Improves the tooling experience
+Documents the set of valid actions
 
 
 
