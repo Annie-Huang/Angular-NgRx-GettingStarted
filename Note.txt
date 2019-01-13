@@ -273,13 +273,20 @@ mergeMap(action =>
 )
 MergeMap maps over every emitted action calling Angular services who return observables, then merges these observables into a single stream. 
 
-
 D:\react\Angular-NgRx-GettingStarted>npm install @ngrx/effects@6.0.1
 
+When should you use the asyncpipe versus subscribing in a component class?
+Component Subscription
+this.productService.getProducts()
+.subscribe(
+  products=> this.products= products
+);
+Async Pipe
+<div*ngIf="products$ | async">
 
-
-
-
+Subscribe in the component when you need the observable's value in the component class, so to work with it or to change the value before using it in the template. 
+If you do not need to do anything but subscribe and use the value in the template, then it's much easier to use an async pipe. 
+If you don't need the value in the component, then technically it's just a syntactic difference and it's up to you which you'd prefer, as long as you unsubscribe. 
 
 
 

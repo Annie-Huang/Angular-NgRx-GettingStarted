@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
@@ -9,6 +9,7 @@ import { ProductService } from '../product.service';
 import {select, Store} from "@ngrx/store";
 import * as fromProduct from '../state/product.reducer';
 import * as productActions from '../state/product.actions';
+import {takeWhile} from "rxjs/operators";
 
 @Component({
   selector: 'pm-product-list',
@@ -16,6 +17,8 @@ import * as productActions from '../state/product.actions';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit, OnDestroy {
+  products$: Observable<Product[]>;
+  componentActive = true;
   pageTitle = 'Products';
   errorMessage: string;
 
@@ -38,13 +41,21 @@ export class ProductListComponent implements OnInit, OnDestroy {
       currentProduct => this.selectedProduct = currentProduct
     );
 
+
+
     // this.productService.getProducts().subscribe(
     //   (products: Product[]) => this.products = products,
     //   (err: any) => this.errorMessage = err.error
     // );
     this.store.dispatch(new productActions.Load());
-    this.store.pipe(select(fromProduct.getProducts))
-      .subscribe((products: Product[]) => this.products = products);
+
+    // this.store.pipe(select(fromProduct.getProducts))
+    //   .subscribe((products: Product[]) => this.products = products);
+/*    // !!! Important: Keep in mind that is not subscribe the check the change on the obersable, this is not remove the products from the store.
+    this.store.pipe(select(fromProduct.getProducts), takeWhile(() => this.componentActive))   // Check out the takeFirst and takeUntil method.
+      .subscribe((products: Product[]) => this.products = products);*/
+    this.products$ = this.store.pipe(select(fromProduct.getProducts));
+
 
 
     // this.store.pipe(select('products')).subscribe(
@@ -69,6 +80,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // this.sub.unsubscribe();
+    this.componentActive = false;
   }
 
   checkChanged(value: boolean): void {
