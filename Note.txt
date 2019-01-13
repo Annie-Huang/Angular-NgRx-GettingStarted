@@ -254,5 +254,40 @@ Modify the login component to use the action creator
 
 Working with Effects
 #################################################
+Benefits of Effects
+Keep components pure
+Isolate side effects
+Easier to test
+
+Effect is a type of angular service.
+
+@Effect()
+loadProducts$
+The dollar suffix is an optional community convention to show that this variable is an observable, 
+to be very clear about when you're dealing with the observable or the observables value. 
+
+mergeMap(action =>
+  this.productService.getProducts().pipe(
+    map(products => (new LoadSuccess(products)))
+  )
+)
+MergeMap maps over every emitted action calling Angular services who return observables, then merges these observables into a single stream. 
+
+
+D:\react\Angular-NgRx-GettingStarted>npm install @ngrx/effects@6.0.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
