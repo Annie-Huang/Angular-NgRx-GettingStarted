@@ -17,6 +17,7 @@ import {takeWhile} from "rxjs/operators";
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit, OnDestroy {
+  errorMessage$: Observable<string>;
   products$: Observable<Product[]>;
   componentActive = true;
   pageTitle = 'Products';
@@ -41,6 +42,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       currentProduct => this.selectedProduct = currentProduct
     );
 
+    this.errorMessage$ = this.store.pipe(select(fromProduct.getError));
 
 
     // this.productService.getProducts().subscribe(

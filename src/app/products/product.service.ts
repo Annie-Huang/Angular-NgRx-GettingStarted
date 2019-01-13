@@ -11,6 +11,7 @@ import { Product } from './product';
 })
 export class ProductService {
   private productsUrl = 'api/products';
+  // private productsUrl = 'api/productszzzzzzz';  // Incorrect Url, use for testing...
 
   // // Remove this.products reference because we are using product.effects.ts now.
   // private products: Product[];

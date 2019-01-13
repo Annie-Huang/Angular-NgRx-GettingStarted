@@ -1,11 +1,12 @@
 import {Injectable} from "@angular/core";
 import {ProductService} from "../product.service";
-import {map, mergeMap} from "rxjs/operators";
+import {catchError, map, mergeMap} from "rxjs/operators";
 import {Product} from "../product";
 
 /* NgRx */
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import * as productActions from "./product.actions";
+import {of} from "rxjs";
 
 @Injectable()
 export class ProductEffects {
@@ -37,7 +38,8 @@ export class ProductEffects {
   loadProducts$ = this.actions$.pipe(
     ofType(productActions.ProductActionTypes.Load), //actionType, string. ofType will filter for only Load actionType.
     mergeMap((action: productActions.Load) => this.productService.getProducts().pipe( // Action
-      map((products: Product[]) => (new productActions.LoadSuccess(products))) // Action
+      map((products: Product[]) => (new productActions.LoadSuccess(products))), // Action
+      catchError(err => of(new productActions.LoadFail(err)))
     ))
   )
 

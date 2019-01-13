@@ -13,12 +13,14 @@ export interface ProductState {
   showProductCode: boolean;
   currentProduct: Product;
   products: Product[];
+  error: string
 }
 
 const initialState: ProductState = {
   showProductCode: true,
   currentProduct: null,
-  products: []
+  products: [],
+  error: ''
 };
 
 
@@ -26,6 +28,7 @@ const initialState: ProductState = {
 // Notice this is not export for outside access.
 const getProductFeatureState = createFeatureSelector<ProductState>('products');
 
+// Need to create one selector for each property in the ProductState.
 // Just get the showProductCode value from the getProductFeatureState.
 export const getShowProductCode = createSelector(
   getProductFeatureState,
@@ -39,7 +42,10 @@ export const getProducts = createSelector(
   getProductFeatureState,
   state => state.products
 );
-
+export const getError = createSelector(
+  getProductFeatureState,
+  state => state.error
+);
 
 
 // // By typing the initial value, the type is implicitly refer so don't need to put the type
@@ -92,7 +98,15 @@ export function reducer(state = initialState, action: ProductActions): ProductSt
     case ProductActionTypes.LoadSuccess:
       return {
         ...state,
-        products: action.payload
+        products: action.payload,
+        error: ''
+      };
+
+    case ProductActionTypes.LoadFail:
+      return {
+        ...state,
+        products: [],
+        error: action.payload
       };
 
     default:
