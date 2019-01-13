@@ -12,6 +12,7 @@ import { NumberValidators } from '../../shared/number.validator';
 import {select, Store} from "@ngrx/store";
 import * as fromProduct from '../state/product.reducer';
 import * as productActions from '../state/product.actions';
+import {takeWhile} from "rxjs/operators";
 
 @Component({
   selector: 'pm-product-edit',
@@ -19,6 +20,7 @@ import * as productActions from '../state/product.actions';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit, OnDestroy {
+  componentActive = true;
   pageTitle = 'Product Edit';
   errorMessage = '';
   productForm: FormGroup;
@@ -71,8 +73,11 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     // this.sub = this.productService.selectedProductChanges$.subscribe(
     //   selectedProduct => this.displayProduct(selectedProduct)
     // );
-    // TODO: Unsubscribe
-    this.store.pipe(select(fromProduct.getCurrentProduct)).subscribe(
+/*    this.store.pipe(select(fromProduct.getCurrentProduct)).subscribe(
+      currentProduct => this.displayProduct(currentProduct)
+    );*/
+    // Done: Unsubscribe
+    this.store.pipe(select(fromProduct.getCurrentProduct), takeWhile(() => this.componentActive)).subscribe(
       currentProduct => this.displayProduct(currentProduct)
     );
 
@@ -84,6 +89,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // this.sub.unsubscribe();
+    this.componentActive = false;
   }
 
   // Also validate on blur
