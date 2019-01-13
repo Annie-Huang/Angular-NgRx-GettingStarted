@@ -198,21 +198,50 @@ export const getShowProductCode =
 Strongly Typing Actions with Action Creators
 #################################################
 Benefits of Strongly Typed Actions
-Prevents hard to find errors
-Improves the tooling experience
-Documents the set of valid actions
+- Prevents hard to find errors
+- Improves the tooling experience
+- Documents the set of valid actions
 
 
+Checklist: Strongly Typing Actions - 1
+Define the action types
+Use an enum to specify the set of named constants:
+export enum ProductActionTypes {
+  ToggleProductCode = '[Product] Toggle Product Code',
+  SetCurrentProduct = '[Product] Set Current Product',
+  ClearCurrentProduct = '[Product] Clear Current Product'
+}
+Specify clear action type strings
 
 
+Checklist: Strongly Typing Actions - 2
+Build an action creator
+Define a class with type and payload properties:
+export class ToggleProductCode implements Action {
+  readonly type = ProductActionTypes.ToggleProductCode;
+  constructor(public payload: boolean) {}
+}
+Use the action creator when dispatching the action:
+this.store.dispatch(
+  new productActions.ToggleProductCode(true)
+);
 
+Checklist: Strongly Typing Actions - 3
+Union the action creators
+Define a union type of all action creators:
+export type ProductActions = ToggleProductCode
+  | SetCurrentProduct
+  | ClearCurrentProduct;
+Use this union type in the reducer:
+export function reducer(state = initialState, action: ProductActions)
 
-
-
-
-
-
-
+Steps to change the action creator:
+Create an user.actions.ts file
+Add an enumfor the action type (MaskUserName)
+Build the associated action creator
+Create a union type for the action creators
+Modify the reducer to use the union type
+Modify the login component to use the action creator
 
 
 

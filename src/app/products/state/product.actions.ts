@@ -3,6 +3,28 @@ import { Product } from '../product';
 /* NgRx */
 import { Action } from '@ngrx/store';
 
+/*
+
+Steps to build strongly type state:
+===============================================
+Strongly type the user state
+Build selectors for maskUserName and currentUser
+Modify the reducer to use the strongly typed state
+Modify the login component to use the strongly typed state and selector
+
+Steps to change the action creator:
+=============================================
+Create an user.actions.ts file
+Add an enumfor the action type (MaskUserName)
+Build the associated action creator
+Create a union type for the action creators
+Modify the reducer to use the union type
+Modify the login component to use the action creator
+
+*/
+
+
+
 export enum ProductActionTypes {
   ToggleProductCode = '[Product] Toggle Product Code',
   SetCurrentProduct = '[Product] Set Current Product',
