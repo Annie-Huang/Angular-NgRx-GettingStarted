@@ -11,7 +11,9 @@ import { Product } from './product';
 })
 export class ProductService {
   private productsUrl = 'api/products';
-  private products: Product[];
+
+  // // Remove this.products reference because we are using product.effects.ts now.
+  // private products: Product[];
 
   // // Use Store, no longer use BehaviorSubject
   // private selectedProductSource = new BehaviorSubject<Product | null>(null);
@@ -25,13 +27,15 @@ export class ProductService {
   // }
 
   getProducts(): Observable<Product[]> {
-    if (this.products) {
-      return of(this.products);
-    }
+
+    // // Remove this.products reference because we are using product.effects.ts now.
+    // if (this.products) {
+    //   return of(this.products);
+    // }
     return this.http.get<Product[]>(this.productsUrl)
       .pipe(
         tap(data => console.log(JSON.stringify(data))),
-        tap(data => this.products = data),
+        // tap(data => this.products = data),
         catchError(this.handleError)
       );
   }
@@ -48,15 +52,21 @@ export class ProductService {
   //   };
   // }
 
+  // TODO:
+  // Now we've gone and broken the ability to update, delete, and add products because we have not set up any update
+  // operations with NgRx. But don't worry, we'll do this in the next module.
+
   createProduct(product: Product): Observable<Product> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     product.id = null;
+
+    // Remove this.products reference because we are using product.effects.ts now.
     return this.http.post<Product>(this.productsUrl, product, { headers: headers })
       .pipe(
         tap(data => console.log('createProduct: ' + JSON.stringify(data))),
-        tap(data => {
-          this.products.push(data);
-        }),
+        // tap(data => {
+        //   this.products.push(data);
+        // }),
         catchError(this.handleError)
       );
   }
@@ -64,15 +74,17 @@ export class ProductService {
   deleteProduct(id: number): Observable<{}> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const url = `${this.productsUrl}/${id}`;
+
+    // Remove this.products reference because we are using product.effects.ts now.
     return this.http.delete<Product>(url, { headers: headers })
       .pipe(
         tap(data => console.log('deleteProduct: ' + id)),
-        tap(data => {
-          const foundIndex = this.products.findIndex(item => item.id === id);
-          if (foundIndex > -1) {
-            this.products.splice(foundIndex, 1);
-          }
-        }),
+        // tap(data => {
+        //   const foundIndex = this.products.findIndex(item => item.id === id);
+        //   if (foundIndex > -1) {
+        //     this.products.splice(foundIndex, 1);
+        //   }
+        // }),
         catchError(this.handleError)
       );
   }
@@ -83,6 +95,8 @@ export class ProductService {
     return this.http.put<Product>(url, product, { headers: headers })
       .pipe(
         tap(() => console.log('updateProduct: ' + product.id)),
+/*
+        // Remove this.products reference because we are using product.effects.ts now.
         // Update the item in the list
         // This is required because the selected product that was edited
         // was a copy of the item from the array.
@@ -92,6 +106,7 @@ export class ProductService {
             this.products[foundIndex] = product;
           }
         }),
+*/
         // Return the product on an update
         map(() => product),
         catchError(this.handleError)
