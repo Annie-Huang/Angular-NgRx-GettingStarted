@@ -194,6 +194,13 @@ export const getShowProductCode =
     state =>state.showProductCode
   );
 
+Steps to build strongly type state:
+===============================================
+Strongly type the user state
+Build selectors for maskUserName and currentUser
+Modify the reducer to use the strongly typed state
+Modify the login component to use the strongly typed state and selector
+
 
 Strongly Typing Actions with Action Creators
 #################################################
@@ -236,6 +243,7 @@ Use this union type in the reducer:
 export function reducer(state = initialState, action: ProductActions)
 
 Steps to change the action creator:
+=============================================
 Create an user.actions.ts file
 Add an enumfor the action type (MaskUserName)
 Build the associated action creator
@@ -244,7 +252,7 @@ Modify the reducer to use the union type
 Modify the login component to use the action creator
 
 
-
-
+Working with Effects
+#################################################
 
 
