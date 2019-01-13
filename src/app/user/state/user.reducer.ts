@@ -18,7 +18,8 @@ const initialState: UserState = {
   currentUser: null
 };
 
-
+// I thought 'users' is the reason why we need to create a State that extends fromRoot.State. Because the app.state.ts has 'user', not 'users'.
+//    Not sure why the Final APM-Demo2's login.component.ts's constructor can use the one from the app.module.ts directly.
 // Selector functions
 const getUserFeatureState = createFeatureSelector<UserState>('users');
 

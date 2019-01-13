@@ -1,4 +1,5 @@
-import {Action} from "@ngrx/store";
+/* NgRx */
+import { Action } from '@ngrx/store';
 
 export enum UserActionTypes {
   MaskUserName = '[User] Mask User Name'
