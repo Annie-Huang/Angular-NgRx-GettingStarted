@@ -288,7 +288,12 @@ Subscribe in the component when you need the observable's value in the component
 If you do not need to do anything but subscribe and use the value in the template, then it's much easier to use an async pipe. 
 If you don't need the value in the component, then technically it's just a syntactic difference and it's up to you which you'd prefer, as long as you unsubscribe. 
 
-
+Checklist: Using Effects
+Install @ngrx/effects
+Build the effect to process that action and dispatch the success and fail actions
+Initialize the effects module in your root and feature modules
+Register your effects in your root or feature modules
+Process the success and fail actions in the reducer
 
 
 
