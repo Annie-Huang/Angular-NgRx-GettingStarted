@@ -1,6 +1,7 @@
 import {Product} from "../product";
 import * as fromRoot from '../../state/app.state';
 import {createFeatureSelector, createSelector} from "@ngrx/store";
+import {ProductActions, ProductActionTypes} from "./product.actions";
 
 // app.state + ProductState as the State. Will be use in product-list.component.ts's constructor
 export interface State extends fromRoot.State {
@@ -41,12 +42,14 @@ export const getProducts = createSelector(
 
 
 
-// By typing the initial value, the type is implicitly refer so don't need to put the type
-// state: ProductState => state = initialState
-export function reducer(state = initialState, action): ProductState {
+// // By typing the initial value, the type is implicitly refer so don't need to put the type
+// // state: ProductState => state = initialState
+// export function reducer(state = initialState, action): ProductState {
+export function reducer(state = initialState, action: ProductActions): ProductState {
   switch (action.type) {
 
-    case 'TOGGLE_PRODUCT_CODE':
+    // case 'TOGGLE_PRODUCT_CODE':
+    case ProductActionTypes.ToggleProductCode:
       // // it will show as:
       // // existing state: undefined
       // // product.reducer.ts:6 payload: true
