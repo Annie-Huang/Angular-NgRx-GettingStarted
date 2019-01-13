@@ -1,11 +1,13 @@
 import {Injectable} from "@angular/core";
-import {Actions, Effect, ofType} from "@ngrx/effects";
 import {ProductService} from "../product.service";
-import * as productActions from "./product.actions";
 import {map, mergeMap} from "rxjs/operators";
 import {Product} from "../product";
 
-@Injectable
+/* NgRx */
+import {Actions, Effect, ofType} from "@ngrx/effects";
+import * as productActions from "./product.actions";
+
+@Injectable()
 export class ProductEffects {
 
   // In the constructor, we inject the Actions observable from the NgRx library, which emits an action every time
