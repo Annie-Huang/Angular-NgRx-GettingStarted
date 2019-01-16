@@ -11,14 +11,16 @@ export interface State extends fromRoot.State {
 // State for this feature (Product)
 export interface ProductState {
   showProductCode: boolean;
-  currentProduct: Product;
+  // currentProduct: Product;
+  currentProductId: number | null;
   products: Product[];
   error: string
 }
 
 const initialState: ProductState = {
   showProductCode: true,
-  currentProduct: null,
+  // currentProduct: null,
+  currentProductId: null,
   products: [],
   error: ''
 };
@@ -34,9 +36,31 @@ export const getShowProductCode = createSelector(
   getProductFeatureState,
   state => state.showProductCode
 );
+export const getCurrentProductId = createSelector(
+  getProductFeatureState,
+  state => state.currentProductId
+);
+// export const getCurrentProduct = createSelector(
+//   getProductFeatureState,
+//   state => state.currentProduct
+// );
 export const getCurrentProduct = createSelector(
   getProductFeatureState,
-  state => state.currentProduct
+  getCurrentProductId,
+  (state, currentProductId) => {
+    if (currentProductId === 0) {
+      return {
+        id: 0,
+        productName: '',
+        productCode: 'New',
+        description: '',
+        starRating: 0
+      };
+    } else {
+      // When it gets to here, the currentProductId will either be a non-zero number, or null.
+      return currentProductId ? state.products.find(p => p.id === currentProductId) : null;
+    }
+  }
 );
 export const getProducts = createSelector(
   getProductFeatureState,
@@ -68,31 +92,46 @@ export function reducer(state = initialState, action: ProductActions): ProductSt
         showProductCode: action.payload
       };
 
-    // One important thing to note here, we are passing a reference to our currentProduct into the store.
-    // That means if we update a property of the object in our component, we mutate the product in the store as well.
-    // To prevent this, we make a copy of the object here, using the spread operator.
+    // // One important thing to note here, we are passing a reference to our currentProduct into the store.
+    // // That means if we update a property of the object in our component, we mutate the product in the store as well.
+    // // To prevent this, we make a copy of the object here, using the spread operator.
+    // case ProductActionTypes.SetCurrentProduct:
+    //   return {
+    //     ...state,
+    //     currentProduct: { ...action.payload }
+    //   };
     case ProductActionTypes.SetCurrentProduct:
       return {
         ...state,
-        currentProduct: { ...action.payload }
+        currentProductId: action.payload.id
       };
 
+    // case ProductActionTypes.ClearCurrentProduct:
+    //   return {
+    //     ...state,
+    //     currentProduct: null
+    //   };
     case ProductActionTypes.ClearCurrentProduct:
       return {
         ...state,
-        currentProduct: null
+        currentProductId: null
       };
 
+    // case ProductActionTypes.InitializeCurrentProduct:
+    //   return {
+    //     ...state,
+    //     currentProduct: {
+    //       id: 0,
+    //       productName: '',
+    //       productCode: 'New',
+    //       description: '',
+    //       starRating: 0
+    //     }
+    //   };
     case ProductActionTypes.InitializeCurrentProduct:
       return {
         ...state,
-        currentProduct: {
-          id: 0,
-          productName: '',
-          productCode: 'New',
-          description: '',
-          starRating: 0
-        }
+        currentProductId: 0
       };
 
     case ProductActionTypes.LoadSuccess:
