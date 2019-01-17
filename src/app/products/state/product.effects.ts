@@ -6,7 +6,8 @@ import {Product} from "../product";
 /* NgRx */
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import * as productActions from "./product.actions";
-import {of} from "rxjs";
+import {Observable, of} from "rxjs";
+import {Action} from "@ngrx/store";
 
 @Injectable()
 export class ProductEffects {
@@ -35,12 +36,33 @@ export class ProductEffects {
   constructor(private actions$: Actions, private productService: ProductService) { }
 
   @Effect()
-  loadProducts$ = this.actions$.pipe(
+  loadProducts$: Observable<Action> = this.actions$.pipe(
     ofType(productActions.ProductActionTypes.Load), //actionType, string. ofType will filter for only Load actionType.
-    mergeMap((action: productActions.Load) => this.productService.getProducts().pipe( // Action
-      map((products: Product[]) => (new productActions.LoadSuccess(products))), // Action
-      catchError(err => of(new productActions.LoadFail(err)))
+    mergeMap((action: productActions.Load) =>   // Action
+      this.productService.getProducts().pipe(
+        map((products: Product[]) => (new productActions.LoadSuccess(products))), // Action
+        catchError(err => of(new productActions.LoadFail(err)))
     ))
+  );
+
+  // We start with the Effect decorator and define a property that provides an observable of action.
+  // This new property watches for actions of type UpdateProduct.
+  // When it receives one, it maps the action to pull off the payload, which, if you recall, is the product to update.
+  // We then call our productService updateProduct method and pass in that product.
+  // 
+  // However, that service call also returns an observable. We don't want nested observables here,
+  // so we use mergeMap to merge and flatten the two observables,
+  // the one from our action (this.actions$) and
+  // the one from our product service (this.productService.updateProduct(product)).
+  @Effect()
+  updateProducts$: Observable<Action> = this.actions$.pipe(
+    ofType(productActions.ProductActionTypes.UpdateProduct), //actionType, string. ofType will filter for only Load actionType.
+    map((action: productActions.UpdateProduct) => action.payload),
+    mergeMap((product: Product) =>   // Action
+      this.productService.updateProduct(product).pipe(
+        map((updatedProduct: Product) => (new productActions.UpdateProductSuccess(updatedProduct))), // Action
+        catchError(err => of(new productActions.UpdateProductFail(err)))
+      ))
   )
 
   /*
