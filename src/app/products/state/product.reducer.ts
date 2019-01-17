@@ -148,6 +148,22 @@ export function reducer(state = initialState, action: ProductActions): ProductSt
         error: action.payload
       };
 
+    case ProductActionTypes.UpdateProductSuccess:
+      // The map() method creates a new array with the results of calling a provided function on every element in the calling array.
+      const updatedProducts = state.products.map(item => action.payload.id === item.id ? action.payload : item);
+      return {
+        ...state,
+        products: updatedProducts,
+        currentProductId: action.payload.id,
+        error: ''
+      };
+
+    case ProductActionTypes.UpdateProductFail:
+      return {
+        ...state,
+        error: action.payload
+      };
+
     default:
       return state;
   }
