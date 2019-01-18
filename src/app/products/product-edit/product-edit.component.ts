@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Subscription } from 'rxjs';
+// import { Subscription } from 'rxjs';
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
@@ -154,11 +154,12 @@ export class ProductEditComponent implements OnInit, OnDestroy {
         const p = { ...this.product, ...this.productForm.value };
 
         if (p.id === 0) {
-          this.productService.createProduct(p).subscribe(
-            // product => this.productService.changeSelectedProduct(product),
-            product => this.store.dispatch(new productActions.SetCurrentProduct(product)),
-            (err: any) => this.errorMessage = err.error
-          );
+          // this.productService.createProduct(p).subscribe(
+          //   // product => this.productService.changeSelectedProduct(product),
+          //   product => this.store.dispatch(new productActions.SetCurrentProduct(product)),
+          //   (err: any) => this.errorMessage = err.error
+          // );
+          this.store.dispatch(new productActions.CreateProduct(p));
         } else {
           // this.productService.updateProduct(p).subscribe(
           //   // product => this.productService.changeSelectedProduct(product),
