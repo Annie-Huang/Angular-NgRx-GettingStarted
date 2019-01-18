@@ -187,11 +187,11 @@ export function reducer(state = initialState, action: ProductActions): ProductSt
         error: action.payload
       };
 
+    // After a delete, the currentProduct is null.
     case ProductActionTypes.DeleteProductSuccess:
-      const newProducts = state.products.filter(item => action.payload !== item.id);
       return {
         ...state,
-        products: newProducts,
+        products: state.products.filter(product => product.id !== action.payload),
         currentProductId: null,
         error: ''
       };
