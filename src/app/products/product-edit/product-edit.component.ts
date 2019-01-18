@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // import { Subscription } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
@@ -21,6 +22,7 @@ import * as productActions from '../state/product.actions';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit, OnDestroy {
+  errorMessage$: Observable<string>;
   componentActive = true;
   pageTitle = 'Product Edit';
   errorMessage = '';
@@ -82,6 +84,9 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       currentProduct => this.displayProduct(currentProduct)
     );
 
+    // Watch for changes to the error message
+    this.errorMessage$ = this.store.pipe(select(fromProduct.getError));
+
     // Watch for value changes
     this.productForm.valueChanges.subscribe(
       value => this.displayMessage = this.genericValidator.processMessages(this.productForm)
@@ -142,7 +147,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     } else {
       // No need to delete, it was never saved
       // this.productService.changeSelectedProduct(null);
-      this.store.dispatch(new productActions.ClearCurrentProduct())
+      this.store.dispatch(new productActions.ClearCurrentProduct());
     }
   }
 
@@ -171,7 +176,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
         }
       }
     } else {
-      this.errorMessage = 'Please correct the validation errors.';
+      // this.errorMessage = 'Please correct the validation errors.';
+      this.errorMessage$ = of('Please correct the validation errors.');
     }
   }
 
