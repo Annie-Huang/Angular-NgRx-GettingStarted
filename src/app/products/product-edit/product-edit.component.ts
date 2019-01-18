@@ -8,11 +8,12 @@ import { ProductService } from '../product.service';
 import { GenericValidator } from '../../shared/generic-validator';
 import { NumberValidators } from '../../shared/number.validator';
 
+import { takeWhile } from 'rxjs/operators';
+
 /* NgRx */
-import {select, Store} from "@ngrx/store";
+import { Store, select } from '@ngrx/store';
 import * as fromProduct from '../state/product.reducer';
 import * as productActions from '../state/product.actions';
-import {takeWhile} from "rxjs/operators";
 
 @Component({
   selector: 'pm-product-edit',
