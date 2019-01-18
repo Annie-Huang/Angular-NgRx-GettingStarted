@@ -1,4 +1,4 @@
-import {Product} from "../product";
+import {Product} from '../product';
 import * as fromRoot from '../../state/app.state';
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {ProductActions, ProductActionTypes} from "./product.actions";
@@ -164,11 +164,13 @@ export function reducer(state = initialState, action: ProductActions): ProductSt
         error: action.payload
       };
 
+    // After a create, the currentProduct is the new product.
     case ProductActionTypes.CreateProductSuccess:
-      const newProducts = state.products.concat(action.payload);
+      // const newProducts = state.products.concat(action.payload);
+      // products: newProducts,
       return {
         ...state,
-        products: newProducts,
+        products: [...state.products, action.payload],
         currentProductId: action.payload.id,
         error: ''
       };
