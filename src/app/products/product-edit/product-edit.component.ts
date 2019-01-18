@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { Product } from '../product';
-import { ProductService } from '../product.service';
+// import { ProductService } from '../product.service';
 import { GenericValidator } from '../../shared/generic-validator';
 import { NumberValidators } from '../../shared/number.validator';
 
@@ -25,7 +25,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   errorMessage$: Observable<string>;
   componentActive = true;
   pageTitle = 'Product Edit';
-  errorMessage = '';
+  // errorMessage = '';
   productForm: FormGroup;
 
   product: Product | null;
@@ -36,9 +36,11 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;
 
+  // constructor(private store: Store<fromProduct.State>,
+  //             private fb: FormBuilder,
+  //             private productService: ProductService) {
   constructor(private store: Store<fromProduct.State>,
-              private fb: FormBuilder,
-              private productService: ProductService) {
+              private fb: FormBuilder) {
 
     // Defines all of the validation messages for the form.
     // These could instead be retrieved from a file or database.
