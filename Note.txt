@@ -306,7 +306,8 @@ directly and immediately updating our state as the user makes changes. This goes
 When using NgRx, we instead use reactive forms, whereby the user's entries are stored in a form group structure. 
 When the user clicks the Save button, we dispatch an action to save those values.
 
-
+Homework:
+With these changes in place, the product- edit. component no longer needs to access the product service, so you can remove it from the constructor.
 
 
 
