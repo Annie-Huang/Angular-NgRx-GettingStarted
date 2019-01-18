@@ -78,6 +78,18 @@ export class ProductEffects {
       ))
   );
 
+  @Effect()
+  deleteProduct$: Observable<Action> = this.actions$.pipe(
+    ofType(productActions.ProductActionTypes.DeleteProduct), //actionType, string. ofType will filter for only Load actionType.
+    map((action: productActions.DeleteProduct) => action.payload),
+    mergeMap((productId: number) =>   // Action
+      this.productService.deleteProduct(productId).pipe(
+        // productService.deleteProduct will not return the deleted id. Check the implementation
+        map(() => (new productActions.DeleteProductSuccess(productId))), // Action
+        catchError(err => of(new productActions.DeleteProductFail(err)))
+      ))
+  );
+
   /*
 RxJS Operators
 switchMap:  << Least use one.
