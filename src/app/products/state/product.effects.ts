@@ -55,7 +55,7 @@ export class ProductEffects {
   // the one from our action (this.actions$) and
   // the one from our product service (this.productService.updateProduct(product)).
   @Effect()
-  updateProducts$: Observable<Action> = this.actions$.pipe(
+  updateProduct$: Observable<Action> = this.actions$.pipe(
     ofType(productActions.ProductActionTypes.UpdateProduct), //actionType, string. ofType will filter for only Load actionType.
     map((action: productActions.UpdateProduct) => action.payload),
     mergeMap((product: Product) =>   // Action
@@ -63,7 +63,18 @@ export class ProductEffects {
         map((updatedProduct: Product) => (new productActions.UpdateProductSuccess(updatedProduct))), // Action
         catchError(err => of(new productActions.UpdateProductFail(err)))
       ))
-  )
+  );
+
+  @Effect()
+  createProduct$: Observable<Action> = this.actions$.pipe(
+    ofType(productActions.ProductActionTypes.CreateProduct), //actionType, string. ofType will filter for only Load actionType.
+    map((action: productActions.CreateProduct) => action.payload),
+    mergeMap((product: Product) =>   // Action
+      this.productService.createProduct(product).pipe(
+        map((newProduct: Product) => (new productActions.CreateProductSuccess(newProduct))), // Action
+        catchError(err => of(new productActions.CreateProductFail(err)))
+      ))
+  );
 
   /*
 RxJS Operators
