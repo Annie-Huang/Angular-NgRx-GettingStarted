@@ -198,7 +198,8 @@ export class ProductEditComponent implements OnInit, OnChanges, OnDestroy {
       }
     } else {
       // this.errorMessage = 'Please correct the validation errors.';
-      this.errorMessage$ = of('Please correct the validation errors.');
+      // this.errorMessage$ = of('Please correct the validation errors.');
+      this.errorMessage = 'Please correct the validation errors.';
     }
   }
 
