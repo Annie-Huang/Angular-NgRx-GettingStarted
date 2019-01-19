@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Input} from '@angular/core';
+import {Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // import { Subscription } from 'rxjs';
@@ -21,7 +21,7 @@ import * as productActions from '../../state/product.actions';
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.css']
 })
-export class ProductEditComponent implements OnInit, OnDestroy {
+export class ProductEditComponent implements OnInit, OnChanges, OnDestroy {
   // errorMessage$: Observable<string>;
   // // errorMessage = '';
   //
@@ -30,6 +30,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   pageTitle = 'Product Edit';
   @Input() errorMessage: string;
+  @Input() selectedProduct: Product;
 
   componentActive = true;
   productForm: FormGroup;
@@ -79,17 +80,17 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       description: ''
     });
 
-    // // Watch for changes to the currently selected product
-    // this.sub = this.productService.selectedProductChanges$.subscribe(
-    //   selectedProduct => this.displayProduct(selectedProduct)
+    // // // Watch for changes to the currently selected product
+    // // this.sub = this.productService.selectedProductChanges$.subscribe(
+    // //   selectedProduct => this.displayProduct(selectedProduct)
+    // // );
+    // /*    this.store.pipe(select(fromProduct.getCurrentProduct)).subscribe(
+    //       currentProduct => this.displayProduct(currentProduct)
+    //     );*/
+    // // Done: Unsubscribe
+    // this.store.pipe(select(fromProduct.getCurrentProduct), takeWhile(() => this.componentActive)).subscribe(
+    //   currentProduct => this.displayProduct(currentProduct)
     // );
-/*    this.store.pipe(select(fromProduct.getCurrentProduct)).subscribe(
-      currentProduct => this.displayProduct(currentProduct)
-    );*/
-    // Done: Unsubscribe
-    this.store.pipe(select(fromProduct.getCurrentProduct), takeWhile(() => this.componentActive)).subscribe(
-      currentProduct => this.displayProduct(currentProduct)
-    );
     //
     // // Watch for changes to the error message
     // this.errorMessage$ = this.store.pipe(select(fromProduct.getError));
@@ -98,6 +99,16 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     this.productForm.valueChanges.subscribe(
       value => this.displayMessage = this.genericValidator.processMessages(this.productForm)
     );
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    // patch form with value from the store
+    if(changes.selectedProduct) {
+      // SimpleChanges got  previousValue: any | currentValue: any | firstChange: boolean | isFirstChange(): boolean;
+      const product: any = changes.selectedProduct.currentValue;
+      this.displayProduct(product);
+    }
   }
 
   ngOnDestroy(): void {
@@ -165,7 +176,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
         // Copy over all of the original product properties
         // Then copy over the values from the form
         // This ensures values not on the form, such as the Id, are retained
-        const p = { ...this.product, ...this.productForm.value };
+        const p = {...this.product, ...this.productForm.value};
 
         if (p.id === 0) {
           // this.productService.createProduct(p).subscribe(

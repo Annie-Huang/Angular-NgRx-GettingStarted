@@ -11,6 +11,7 @@
   </div>
   <div class='col-md-8'>
     <pm-product-edit
+      [selectedProduct]="selectedProduct$ | async"
       [errorMessage]="errorMessage$ | async"
     ></pm-product-edit>
   </div>
