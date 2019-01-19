@@ -130,4 +130,8 @@ export class ProductShellComponent implements OnInit {
   deleteProduct(id: number): void {
     this.store.dispatch(new productActions.DeleteProduct(id));
   }
+
+  clearCurrentProduct(): void {
+    this.store.dispatch(new productActions.ClearCurrentProduct());
+  }
 }

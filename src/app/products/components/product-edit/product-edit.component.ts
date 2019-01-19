@@ -34,6 +34,7 @@ export class ProductEditComponent implements OnInit, OnChanges, OnDestroy {
   @Output() create = new EventEmitter<Product>();
   @Output() update = new EventEmitter<Product>();
   @Output() delete = new EventEmitter<number>();
+  @Output() clearCurrent = new EventEmitter<void>();
 
   componentActive = true;
   productForm: FormGroup;
@@ -168,9 +169,10 @@ export class ProductEditComponent implements OnInit, OnChanges, OnDestroy {
         this.delete.emit(this.product.id);
       }
     } else {
-      // No need to delete, it was never saved
-      // this.productService.changeSelectedProduct(null);
-      this.store.dispatch(new productActions.ClearCurrentProduct());
+      // // No need to delete, it was never saved
+      // // this.productService.changeSelectedProduct(null);
+      // this.store.dispatch(new productActions.ClearCurrentProduct());
+      this.clearCurrent.emit();
     }
   }
 
