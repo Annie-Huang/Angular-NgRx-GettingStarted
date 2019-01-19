@@ -169,6 +169,8 @@ export class ProductEditComponent implements OnInit, OnChanges, OnDestroy {
         this.delete.emit(this.product.id);
       }
     } else {
+      // This will be trigger if you click Add button and Delete button
+
       // // No need to delete, it was never saved
       // // this.productService.changeSelectedProduct(null);
       // this.store.dispatch(new productActions.ClearCurrentProduct());
