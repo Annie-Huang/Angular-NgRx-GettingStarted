@@ -13,6 +13,7 @@
     <pm-product-edit
       [selectedProduct]="selectedProduct$ | async"
       [errorMessage]="errorMessage$ | async"
+      (create)="saveProduct($event)"
     ></pm-product-edit>
   </div>
 </div>

@@ -118,4 +118,8 @@ export class ProductShellComponent implements OnInit {
     // this.productService.changeSelectedProduct(product);
     this.store.dispatch(new productActions.SetCurrentProduct(product));
   }
+
+  saveProduct(product: Product): void {
+    this.store.dispatch(new productActions.CreateProduct(product));
+  }
 }

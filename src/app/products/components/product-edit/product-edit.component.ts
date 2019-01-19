@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // import { Subscription } from 'rxjs';
@@ -31,6 +31,7 @@ export class ProductEditComponent implements OnInit, OnChanges, OnDestroy {
   pageTitle = 'Product Edit';
   @Input() errorMessage: string;
   @Input() selectedProduct: Product;
+  @Output() create = new EventEmitter<boolean>();
 
   componentActive = true;
   productForm: FormGroup;
@@ -179,12 +180,13 @@ export class ProductEditComponent implements OnInit, OnChanges, OnDestroy {
         const p = {...this.product, ...this.productForm.value};
 
         if (p.id === 0) {
-          // this.productService.createProduct(p).subscribe(
-          //   // product => this.productService.changeSelectedProduct(product),
-          //   product => this.store.dispatch(new productActions.SetCurrentProduct(product)),
-          //   (err: any) => this.errorMessage = err.error
-          // );
-          this.store.dispatch(new productActions.CreateProduct(p));
+          // // this.productService.createProduct(p).subscribe(
+          // //   // product => this.productService.changeSelectedProduct(product),
+          // //   product => this.store.dispatch(new productActions.SetCurrentProduct(product)),
+          // //   (err: any) => this.errorMessage = err.error
+          // // );
+          // this.store.dispatch(new productActions.CreateProduct(p));
+          this.create.emit(p);
         } else {
           // this.productService.updateProduct(p).subscribe(
           //   // product => this.productService.changeSelectedProduct(product),
