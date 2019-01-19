@@ -334,12 +334,15 @@ Easier to test
 ChangeDetectionStrategy.OnPush
 OnPushmeans that the change detector's mode will be initially set toCheckOnce
 
+ChangeDetectionStrategy.Default
 
+Barrel
+A way to rollup exports from several modules into a single convenience module. The barrel itself is a module file that re-exports selected exports of other modules.
 
-
-
-
-
+Benefits of State Index.ts Files	<< I will skip this part as I think things inside the product.reducer.ts is more clear to me than in the index.ts file.
+Public API for state
+Separation of concerns
+Cleaner code
 
 
 
