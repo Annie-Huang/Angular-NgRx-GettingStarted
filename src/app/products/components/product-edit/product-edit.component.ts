@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // import { Subscription } from 'rxjs';
@@ -29,6 +29,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   //
 
   pageTitle = 'Product Edit';
+  @Input() errorMessage: string;
 
   componentActive = true;
   productForm: FormGroup;
@@ -89,9 +90,9 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     this.store.pipe(select(fromProduct.getCurrentProduct), takeWhile(() => this.componentActive)).subscribe(
       currentProduct => this.displayProduct(currentProduct)
     );
-
-    // Watch for changes to the error message
-    this.errorMessage$ = this.store.pipe(select(fromProduct.getError));
+    //
+    // // Watch for changes to the error message
+    // this.errorMessage$ = this.store.pipe(select(fromProduct.getError));
 
     // Watch for value changes
     this.productForm.valueChanges.subscribe(
