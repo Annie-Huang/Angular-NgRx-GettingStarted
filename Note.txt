@@ -20,6 +20,10 @@ Annie@Annie-PC MINGW32 /d/react/Angular-NgRx-GettingStarted (1-first-look-at-ngr
 $ git push --delete origin APM-Demo0-The-starter-files-for-this-course
 
 
+https://github.com/johnpapa/angular-ngrx-data
+
+
+
 Introduction
 ############################
 What Is State?
@@ -345,14 +349,38 @@ Separation of concerns
 Cleaner code
 
 
+Final Words
+#################################################
+@ngrx/entity
+Helps with Create, Read, Update, and Delete (CRUD) operations on entities
+Helper function for managing collections of entities
+Reduces the boilerplate required to manage entities
 
+@ngrx/schematics
+Schematics: scaffolding library for generating code using the CLI
+- ng new
+- ng generate
+@ngrx/schematics: set of schematics for generating NgRx
+- ng generate store
+- ng generate action
+- ng generate reducer
+- ng generate effect
+- ng generate feature
+- ng generate container
+- ng generate entity
 
+@ngrx/router-store
+Connects the Angular router to the store
+Dispatches router navigation actions
 
-
-
-
-
-
-
+ngrx-data
+Abstracts away the NgRxentity code
+Configuration and convention, not code
+- No actions or action creators
+- No reducers
+- No selectors
+- No effects
+- No code generation
+Extension points for customization
 
 
