@@ -126,4 +126,8 @@ export class ProductShellComponent implements OnInit {
   updateProduct(product: Product): void {
     this.store.dispatch(new productActions.UpdateProduct(product));
   }
+
+  deleteProduct(id: number): void {
+    this.store.dispatch(new productActions.DeleteProduct(id));
+  }
 }

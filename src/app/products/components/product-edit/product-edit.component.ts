@@ -31,8 +31,9 @@ export class ProductEditComponent implements OnInit, OnChanges, OnDestroy {
   pageTitle = 'Product Edit';
   @Input() errorMessage: string;
   @Input() selectedProduct: Product;
-  @Output() create = new EventEmitter<boolean>();
-  @Output() update = new EventEmitter<boolean>();
+  @Output() create = new EventEmitter<Product>();
+  @Output() update = new EventEmitter<Product>();
+  @Output() delete = new EventEmitter<number>();
 
   componentActive = true;
   productForm: FormGroup;
@@ -158,12 +159,13 @@ export class ProductEditComponent implements OnInit, OnChanges, OnDestroy {
   deleteProduct(): void {
     if (this.product && this.product.id) {
       if (confirm(`Really delete the product: ${this.product.productName}?`)) {
-        // this.productService.deleteProduct(this.product.id).subscribe(
-        //   // () => this.productService.changeSelectedProduct(null),
-        //   () => this.store.dispatch(new productActions.ClearCurrentProduct()),
-        //   (err: any) => this.errorMessage = err.error
-        // );
-        this.store.dispatch(new productActions.DeleteProduct(this.product.id));
+        // // this.productService.deleteProduct(this.product.id).subscribe(
+        // //   // () => this.productService.changeSelectedProduct(null),
+        // //   () => this.store.dispatch(new productActions.ClearCurrentProduct()),
+        // //   (err: any) => this.errorMessage = err.error
+        // // );
+        // this.store.dispatch(new productActions.DeleteProduct(this.product.id));
+        this.delete.emit(this.product.id);
       }
     } else {
       // No need to delete, it was never saved

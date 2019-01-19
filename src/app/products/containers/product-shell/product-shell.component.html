@@ -15,6 +15,7 @@
       [errorMessage]="errorMessage$ | async"
       (create)="saveProduct($event)"
       (update)="updateProduct($event)"
+      (delete)="deleteProduct($event)"
     ></pm-product-edit>
   </div>
 </div>
