@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Product } from '../product';
-import { ProductService } from '../product.service';
+import { Product } from '../../product';
+import { ProductService } from '../../product.service';
 
 import { Observable, Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
 /* NgRx */
 import { Store, select } from '@ngrx/store';
-import * as fromProduct from '../state/product.reducer';
-import * as productActions from '../state/product.actions';
+import * as fromProduct from '../../state/product.reducer';
+import * as productActions from '../../state/product.actions';
 
 @Component({
   selector: 'pm-product-list',

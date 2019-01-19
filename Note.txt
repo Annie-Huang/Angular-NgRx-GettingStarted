@@ -310,14 +310,26 @@ Homework:
 With these changes in place, the product- edit. component no longer needs to access the product service, so you can remove it from the constructor.
 
 
+Architectural Considerations
+#################################################
+Benefits of Folders by Feature
+Follows Angular style guide
+Easy to find related files
+Less cluttered
 
+You may have heard of these categories being called 
+fat and skinny, 
+smart and dumb, 
+stateful and pure,
+screens and components, 
+but let's stick with the presentational and container components as it's the most common way to name these.
 
-
-
-
-
-
-
+Benefits of Presentational and Container Components
+Performance
+ - The performance is a key benefit of following this pattern by utilizing Angular's change detection strategy called OnPush. 
+   OnPush allows skipping change detection on presentational components whose @Inputs have not changed. 
+Composability
+Easier to test
 
 
 
