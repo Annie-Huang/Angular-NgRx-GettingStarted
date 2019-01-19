@@ -22,14 +22,18 @@ import * as productActions from '../../state/product.actions';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit, OnDestroy {
-  errorMessage$: Observable<string>;
-  componentActive = true;
+  // errorMessage$: Observable<string>;
+  // // errorMessage = '';
+  //
+  // // sub: Subscription;
+  //
+
   pageTitle = 'Product Edit';
-  // errorMessage = '';
+
+  componentActive = true;
   productForm: FormGroup;
 
   product: Product | null;
-  // sub: Subscription;
 
   // Use with the generic validation message class
   displayMessage: { [key: string]: string } = {};
