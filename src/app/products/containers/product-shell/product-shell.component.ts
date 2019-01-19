@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 
 import { Product } from '../../product';
 import { ProductService } from '../../product.service';
@@ -12,7 +12,8 @@ import * as fromProduct from '../../state/product.reducer';
 import * as productActions from '../../state/product.actions';
 
 @Component({
-    templateUrl: './product-shell.component.html'
+    templateUrl: './product-shell.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductShellComponent implements OnInit {
   // errorMessage$: Observable<string>;

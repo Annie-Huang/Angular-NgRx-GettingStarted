@@ -331,7 +331,8 @@ Performance
 Composability
 Easier to test
 
-
+ChangeDetectionStrategy.OnPush
+OnPushmeans that the change detector's mode will be initially set toCheckOnce
 
 
 
