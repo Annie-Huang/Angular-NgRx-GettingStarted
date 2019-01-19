@@ -32,6 +32,7 @@ export class ProductEditComponent implements OnInit, OnChanges, OnDestroy {
   @Input() errorMessage: string;
   @Input() selectedProduct: Product;
   @Output() create = new EventEmitter<boolean>();
+  @Output() update = new EventEmitter<boolean>();
 
   componentActive = true;
   productForm: FormGroup;
@@ -188,12 +189,13 @@ export class ProductEditComponent implements OnInit, OnChanges, OnDestroy {
           // this.store.dispatch(new productActions.CreateProduct(p));
           this.create.emit(p);
         } else {
-          // this.productService.updateProduct(p).subscribe(
-          //   // product => this.productService.changeSelectedProduct(product),
-          //   product => this.store.dispatch(new productActions.SetCurrentProduct(product)),
-          //   (err: any) => this.errorMessage = err.error
-          // );
-          this.store.dispatch(new productActions.UpdateProduct(p));
+          // // this.productService.updateProduct(p).subscribe(
+          // //   // product => this.productService.changeSelectedProduct(product),
+          // //   product => this.store.dispatch(new productActions.SetCurrentProduct(product)),
+          // //   (err: any) => this.errorMessage = err.error
+          // // );
+          // this.store.dispatch(new productActions.UpdateProduct(p));
+          this.update.emit(p);
         }
       }
     } else {

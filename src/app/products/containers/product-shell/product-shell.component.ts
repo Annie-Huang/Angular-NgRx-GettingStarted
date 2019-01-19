@@ -122,4 +122,8 @@ export class ProductShellComponent implements OnInit {
   saveProduct(product: Product): void {
     this.store.dispatch(new productActions.CreateProduct(product));
   }
+
+  updateProduct(product: Product): void {
+    this.store.dispatch(new productActions.UpdateProduct(product));
+  }
 }
