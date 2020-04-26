@@ -167,7 +167,7 @@ exportconstgetCurrentProduct= createSelector(
   (state, currentProductId) =>
     state.products.find(p =>p.id === currentProductId)
 );
-Bottom line, when building selectors, define one for each bit of state that is accessed from the store 
+Bottom line, when building selectors, define one for each bit of state that is accessed from the store
 and compose them as needed by your components and services.
 
 
@@ -192,7 +192,7 @@ Conceptually similar to stored procedures
 Feature selector:
 const getProductFeatureState = createFeatureSelector<ProductState>('products');
 State selector:
-export const getShowProductCode = 
+export const getShowProductCode =
   createSelector(
     getProductFeatureState,
     state =>state.showProductCode
@@ -267,15 +267,15 @@ Effect is a type of angular service.
 
 @Effect()
 loadProducts$
-The dollar suffix is an optional community convention to show that this variable is an observable, 
-to be very clear about when you're dealing with the observable or the observables value. 
+The dollar suffix is an optional community convention to show that this variable is an observable,
+to be very clear about when you're dealing with the observable or the observables value.
 
 mergeMap(action =>
   this.productService.getProducts().pipe(
     map(products => (new LoadSuccess(products)))
   )
 )
-MergeMap maps over every emitted action calling Angular services who return observables, then merges these observables into a single stream. 
+MergeMap maps over every emitted action calling Angular services who return observables, then merges these observables into a single stream.
 
 D:\react\Angular-NgRx-GettingStarted>npm install @ngrx/effects@6.0.1
 
@@ -288,9 +288,9 @@ this.productService.getProducts()
 Async Pipe
 <div*ngIf="products$ | async">
 
-Subscribe in the component when you need the observable's value in the component class, so to work with it or to change the value before using it in the template. 
-If you do not need to do anything but subscribe and use the value in the template, then it's much easier to use an async pipe. 
-If you don't need the value in the component, then technically it's just a syntactic difference and it's up to you which you'd prefer, as long as you unsubscribe. 
+Subscribe in the component when you need the observable's value in the component class, so to work with it or to change the value before using it in the template.
+If you do not need to do anything but subscribe and use the value in the template, then it's much easier to use an async pipe.
+If you don't need the value in the component, then technically it's just a syntactic difference and it's up to you which you'd prefer, as long as you unsubscribe.
 
 Checklist: Using Effects
 Install @ngrx/effects
@@ -302,12 +302,12 @@ Process the success and fail actions in the reducer
 
 Performing Update Operations
 #################################################
-In Angular there are two ways to implement a form, template-driven and reactive. 
+In Angular there are two ways to implement a form, template-driven and reactive.
 
-Template-driven forms leverages two-way binding with ngModel. Two-way binding binds the user's entry to our model, 
-directly and immediately updating our state as the user makes changes. This goes against the NgRx principle of immutable data. 
+Template-driven forms leverages two-way binding with ngModel. Two-way binding binds the user's entry to our model,
+directly and immediately updating our state as the user makes changes. This goes against the NgRx principle of immutable data.
 
-When using NgRx, we instead use reactive forms, whereby the user's entries are stored in a form group structure. 
+When using NgRx, we instead use reactive forms, whereby the user's entries are stored in a form group structure.
 When the user clicks the Save button, we dispatch an action to save those values.
 
 Homework:
@@ -321,22 +321,23 @@ Follows Angular style guide
 Easy to find related files
 Less cluttered
 
-You may have heard of these categories being called 
-fat and skinny, 
-smart and dumb, 
+You may have heard of these categories being called
+fat and skinny,
+smart and dumb,
 stateful and pure,
-screens and components, 
+screens and components,
 but let's stick with the presentational and container components as it's the most common way to name these.
 
 Benefits of Presentational and Container Components
 Performance
- - The performance is a key benefit of following this pattern by utilizing Angular's change detection strategy called OnPush. 
-   OnPush allows skipping change detection on presentational components whose @Inputs have not changed. 
+ - The performance is a key benefit of following this pattern by utilizing Angular's change detection strategy called OnPush.
+   OnPush allows skipping change detection on presentational components whose @Inputs have not changed.
 Composability
 Easier to test
 
 ChangeDetectionStrategy.OnPush
 OnPushmeans that the change detector's mode will be initially set toCheckOnce
+You generally put this in the container component.
 
 ChangeDetectionStrategy.Default
 

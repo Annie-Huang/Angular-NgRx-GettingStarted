@@ -11,6 +11,8 @@ import { Store, select } from '@ngrx/store';
 import * as fromProduct from '../../state/product.reducer';
 import * as productActions from '../../state/product.actions';
 
+// Changing changeDetection to OnPush:
+// now unless a new input reference is passed or a DOM event is raised in your component or its children, the view will not get updated.
 @Component({
     templateUrl: './product-shell.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -33,7 +35,8 @@ export class ProductShellComponent implements OnInit {
   errorMessage$: Observable<string>;
 
 
-  constructor(private store: Store<fromProduct.State>, private productService: ProductService) { }
+  // constructor(private store: Store<fromProduct.State>, private productService: ProductService) { }
+  constructor(private store: Store<fromProduct.State>) { }
 
   ngOnInit(): void {
     this.store.dispatch(new productActions.Load());
